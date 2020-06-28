@@ -9,4 +9,4 @@ jobs:
         runs-on: ubuntu-16.04
         steps:
             - name: Hello
-              run: echo "Hello!"
+              run: pwd; ls -la
