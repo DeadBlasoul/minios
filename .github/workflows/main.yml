@@ -1,0 +1,12 @@
+name: Artifacts Building
+
+on:
+    push:
+    create:
+    
+jobs:
+    build:
+        runs-on: ubuntu-xenial
+        steps:
+            - name: Hello
+              run: echo "Hello!"
