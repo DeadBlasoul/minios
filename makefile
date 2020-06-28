@@ -1,15 +1,15 @@
 #обновление ядра в образе
-update_image: compile
+update_image: 
 	@losetup /dev/loop1 ./hdd.img
 	@echo "Mounting partition to /dev/loop2..."
 	@losetup /dev/loop2 ./hdd.img \
-	--offset	`echo \`fdisk -lu /dev/loop1 | sed -n 10p | awk '{print $$3}'\`*512 | bc` \
-	--sizelimit `echo \`fdisk -lu /dev/loop1 | sed -n 10p | awk '{print $$4}'\`*512 | bc`
+		--offset `echo \`fdisk -lu /dev/loop1 | sed -n 9p | awk '{print $$3}'\`*512 | bc` \
+		--sizelimit `echo \`fdisk -lu /dev/loop1 | sed -n 9p | awk '{print $$4}'\`*512 | bc`
 	@losetup -d /dev/loop1
 
 	@echo "Write new MiniOS.bin to hdd.img..."
 	@mkdir -p tempdir
-	@mount /dev/loop2 tempdir
+	@mount /dev/loop2 tempdir/
 	@cp src/MiniOS.bin tempdir/
 	@umount /dev/loop2
 	@rm -r tempdir
@@ -30,8 +30,8 @@ image:
 
 	@echo "Mounting partition to /dev/loop2..."
 	@losetup /dev/loop2 ./hdd.img \
-	--offset	`echo \`fdisk -lu /dev/loop1 | sed -n 10p | awk '{print $$3}'\`*512 | bc` \
-	--sizelimit `echo \`fdisk -lu /dev/loop1 | sed -n 10p | awk '{print $$4}'\`*512 | bc`
+		--offset `echo \`fdisk -lu /dev/loop1 | sed -n 9p | awk '{print $$3}'\`*512 | bc` \
+		--sizelimit `echo \`fdisk -lu /dev/loop1 | sed -n 9p | awk '{print $$4}'\`*512 | bc`
 	@losetup -d /dev/loop1
 
 	@echo "Format partition..."
@@ -43,6 +43,7 @@ image:
 	@mkdir tempdir/boot
 	@cp -r grub tempdir/boot/
 	@cp ./src/MiniOS.bin tempdir/
+#	@cp ./initrd tempdir/
 	@sleep 1
 	@umount /dev/loop2
 	@rm -r tempdir
@@ -62,5 +63,8 @@ clean:
 #освобождение занятых ресурсов (если аварийно заверешены команды компиляции)
 umount:
 	@umount /dev/loop2
+	@umount /dev/loop1
+	@umount /dev/loop0
 	@losetup -d /dev/loop1
 	@losetup -d /dev/loop2
+	@losetup -d /dev/loop0
