@@ -14,7 +14,7 @@ jobs:
               run: sudo apt update && sudo apt install -y gcc nasm
             
             - name: Checkout permissions
-              run: chmod udo+x ./compile.sh
+              run: chmod ugo+x ./compile.sh
                  
             - name: Build artifacts
               run: sudo ./compile.sh
