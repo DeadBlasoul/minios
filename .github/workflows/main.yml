@@ -17,7 +17,9 @@ jobs:
               run: chmod ugo+x ./compile.sh
          
             - name: List files
-              run: ls -la
+              run: |
+                ls -la
+                cat compile.sh
                  
             - name: Build artifacts
               run: sudo ./compile.sh
