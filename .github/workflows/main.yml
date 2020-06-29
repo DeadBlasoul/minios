@@ -22,4 +22,4 @@ jobs:
                 cat compile.sh
                  
             - name: Build artifacts
-              run: sudo ./compile.sh
+              run: sudo bash compile.sh
