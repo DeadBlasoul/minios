@@ -11,10 +11,10 @@ jobs:
             - uses: actions/checkout@v1
             
             - name: Checkout dependecies
-              run: apt install -y gcc nasm
+              run: sudo apt update && sudo apt install -y gcc nasm
             
             - name: Checkout permissions
               run: chmod udo+x ./compile.sh
                  
             - name: Build artifacts
-              run: ./compile.sh
+              run: sudo ./compile.sh
