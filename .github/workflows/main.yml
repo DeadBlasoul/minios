@@ -21,3 +21,9 @@ jobs:
             
             - name: Checkout artifacts
               run: test -f hdd.img && ls -la hdd.img
+              
+            - name: Save boot image
+              uses: actions/upload-artifact@v1
+              with:
+                name: hdd.img
+                path: ${{runner.workspace}}/hdd.img
