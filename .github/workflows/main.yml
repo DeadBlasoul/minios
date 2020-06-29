@@ -11,7 +11,7 @@ jobs:
             - uses: actions/checkout@v1
             
             - name: Checkout dependecies
-              run: sudo apt update && sudo apt install -y gcc nasm
+              run: sudo apt update && sudo apt install -y gcc nasm bc
             
             - name: Checkout permissions
               run: chmod ugo+x ./compile.sh
