@@ -15,11 +15,6 @@ jobs:
             
             - name: Checkout permissions
               run: chmod ugo+x ./compile.sh
-         
-            - name: List files
-              run: |
-                ls -la
-                cat compile.sh
                  
             - name: Build artifacts
               run: sudo bash compile.sh
