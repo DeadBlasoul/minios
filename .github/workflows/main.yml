@@ -18,3 +18,6 @@ jobs:
                  
             - name: Build artifacts
               run: sudo bash compile.sh
+            
+            - name: Checkout artifacts
+              run: test -f hdd.img && ls -la hdd.img
