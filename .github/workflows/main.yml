@@ -20,7 +20,7 @@ jobs:
               run: sudo bash compile.sh
             
             - name: Checkout artifacts
-              run: test -f hdd.img && ls -la hdd.img
+              run: test -f hdd.img && pwd && ls -la hdd.img
               
             - name: Save boot image
               uses: actions/upload-artifact@v1
