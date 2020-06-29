@@ -1,6 +1,16 @@
 # minios
 
+**Checkout permissions**
 ```sh
-$ sudo ./compile.sh
-$ run_qemu.sh
+chmod +x *.sh
+```
+
+**Build artifacts**
+```sh
+sudo ./compile.sh
+```
+
+**Run image**
+```sh
+./run_qemu.sh
 ```
