@@ -9,5 +9,12 @@ jobs:
         runs-on: ubuntu-16.04
         steps:
             - uses: actions/checkout@v1
-            - name: Hello
-              run: pwd; ls -la
+            
+            - name: Checkout dependecies
+              run: apt install -y gcc nasm
+            
+            - name: Checkout permissions
+              run: chmod udo+x ./compile.sh
+                 
+            - name: Build artifacts
+              run: ./compile.sh
