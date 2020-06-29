@@ -26,4 +26,4 @@ jobs:
               uses: actions/upload-artifact@v1
               with:
                 name: hdd.img
-                path: ${{runner.workspace}}/hdd.img
+                path: ${{runner.workspace}}/minios/hdd.img
