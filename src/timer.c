@@ -26,7 +26,7 @@ typedef struct
 } clock_device_t;
 
 static volatile u32int sleep_count = 0;
-const struct timespec __clk_infinite = {.tv_sec = (u32int)-1, .tv_nsec = 0};
+const struct timespec __clk_infinite = {.tv_sec = 2147483647, .tv_nsec = 0};
 
 static void __clk_monotonic_increase_tick_count(registers_t regs);
 
@@ -210,8 +210,7 @@ int clock_nanosleep(
   while (exit_status = clock_gettime(CLOCK_MONOTONIC, &current),
          !FAILED(exit_status) && a_then_b(&current, &wakeline))
   {
-    /*
-    if (sleep_count == proc_count())
+    if (proc_count() - sleep_count <= 1)
     {
       asm volatile("hlt");
     }
@@ -219,8 +218,6 @@ int clock_nanosleep(
     {
       switch_task();
     }
-    //*/
-    asm volatile("hlt");
   }
   --sleep_count;
 

@@ -14,11 +14,11 @@ extern u32int end;
 extern u32int placement_address;
 u32int initial_esp;
 
-static const struct timespec one_s   = {.tv_sec = 1, .tv_nsec = 0};
-static const struct timespec two_s   = {.tv_sec = 2, .tv_nsec = 0};
+static const struct timespec one_s = {.tv_sec = 1, .tv_nsec = 0};
+static const struct timespec two_s = {.tv_sec = 2, .tv_nsec = 0};
 static const struct timespec three_s = {.tv_sec = 3, .tv_nsec = 0};
-static const struct timespec four_s  = {.tv_sec = 4, .tv_nsec = 0};
-static const struct timespec five_s  = {.tv_sec = 5, .tv_nsec = 0};
+static const struct timespec four_s = {.tv_sec = 4, .tv_nsec = 0};
+static const struct timespec five_s = {.tv_sec = 5, .tv_nsec = 0};
 
 void task_1(void)
 {
@@ -34,6 +34,27 @@ void task_2(void)
   monitor_write("[*] task 2 started\n");
   clock_nanosleep(CLOCK_MONOTONIC, 0, &four_s, NULL);
   monitor_write("[!] task 2 done job\n");
+}
+
+void task_3(void)
+{
+  monitor_write("[*] task 3 started\n");
+  clock_nanosleep(CLOCK_MONOTONIC, 0, &five_s, NULL);
+  monitor_write("[!] task 3 done job\n");
+}
+
+void task_4(void)
+{
+  monitor_write("[*] task 4 started\n");
+  clock_nanosleep(CLOCK_MONOTONIC, 0, &five_s, NULL);
+  monitor_write("[!] task 4 done job\n");
+}
+
+void task_5(void)
+{
+  monitor_write("[*] task 5 started\n");
+  clock_nanosleep(CLOCK_MONOTONIC, 0, &five_s, NULL);
+  monitor_write("[!] task 5 done job\n");
 }
 
 int main(struct multiboot *mboot_ptr, u32int initial_stack)
@@ -53,11 +74,16 @@ int main(struct multiboot *mboot_ptr, u32int initial_stack)
   // Start multitasking.
   initialise_tasking();
 
-  if (fork())
+  if (fork() == 0)
     task_1();
-  // else if (fork())
-  else
+  else if (fork() == 0)
     task_2();
+  else if (fork() == 0)
+    task_3();
+  else if (fork() == 0)
+    task_4();
+  else if (fork() == 0)
+    task_5();
 
   // Sleep forever
   clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, __CLK_INFINITE, NULL);
