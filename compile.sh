@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Подготавливаем окружение для компиляции
-make umount -i
+make umount -i 2> /dev/null
 
 #Компилируем ядро
 make compile

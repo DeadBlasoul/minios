@@ -24,7 +24,7 @@ u16int inw(u16int port)
 }
 
 // Copy len bytes from src to dest.
-void memcpy(u8int *dest, const u8int *src, u32int len)
+void memcpy(void *dest, const void *src, u32int len)
 {
     const u8int *sp = (const u8int *)src;
     u8int *dp = (u8int *)dest;
@@ -32,10 +32,10 @@ void memcpy(u8int *dest, const u8int *src, u32int len)
 }
 
 // Write len copies of val into dest.
-void memset(u8int *dest, u8int val, u32int len)
+void memset(void *dest, const int val, u32int len)
 {
     u8int *temp = (u8int *)dest;
-    for ( ; len != 0; len--) *temp++ = val;
+    for ( ; len != 0; len--) *temp++ = (u8int)val;
 }
 
 // Compare two strings. Should return -1 if 
@@ -108,8 +108,9 @@ extern void panic(const char *message, const char *file, u32int line)
     monitor_write(":");
     monitor_write_dec(line);
     monitor_write("\n");
-    // Halt by going into an infinite loop.
-    for(;;);
+
+    // Halt logical cpu
+    asm volatile("hlt");
 }
 
 extern void panic_assert(const char *file, u32int line, const char *desc)
@@ -124,6 +125,7 @@ extern void panic_assert(const char *file, u32int line, const char *desc)
     monitor_write(":");
     monitor_write_dec(line);
     monitor_write("\n");
-    // Halt by going into an infinite loop.
-    for(;;);
+    
+    // Halt logical cpu
+    asm volatile("hlt");
 }

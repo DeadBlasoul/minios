@@ -3,6 +3,7 @@
 //          Part of this code is modified from Bran's kernel development tutorials.
 //          Rewritten for JamesM's kernel development tutorials.
 //
+#pragma once
 
 #include "common.h"
 
